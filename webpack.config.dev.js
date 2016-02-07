@@ -27,8 +27,13 @@ module.exports = {
         test: /\.scss$/,
         loader: 'style!css!sass!'
       },
-      { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000' },
-      { test: /\.(ttf|eot)$/, loader: 'file' }
+      {
+        test: /\.css$/,
+        loader: 'style!css!'
+      },
+      { test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/, loader: 'url?limit=100000&name=[name].[ext]' }
+      // { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      // { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   },
   plugins: [

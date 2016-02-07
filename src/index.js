@@ -1,4 +1,5 @@
 import './styles/main.scss';
+require('font-awesome/css/font-awesome.css');
 
 if (module.hot) {
   var webpackHotMiddlewareClient = require('webpack-hot-middleware/client');
