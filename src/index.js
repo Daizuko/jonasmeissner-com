@@ -1,3 +1,5 @@
+import './js/menu';
+import './js/scroll';
 import './styles/main.scss';
 require('font-awesome/css/font-awesome.css');
 
