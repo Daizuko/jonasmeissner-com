@@ -1,7 +1,8 @@
-# Landing Page
+# Personal website
 
-A generic landing page template with some neat features. It will reload the page
-when you make changes to most of the files (routes don't work currently).
+A one page website with fullscreen menu. It's used as my personal website and you can check it out at jonasmeissner.com soon (not up yet).
+
+Backend is made by my friend, check out his repository here: https://github.com/zoeesilcock/landing-page
 
 ## Installation
 
@@ -18,7 +19,7 @@ npm run build
 
 ## Usage
 
-Fork it and add you own markup, styles and routes.
+Fork it and add your own markup, styles and routes.
 
 ### Routes
 
