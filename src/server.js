@@ -10,7 +10,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddlewareBuilder = require('webpack-hot-middleware');
 
 var routes = require('./routes/index');
-var about = require('./routes/about');
+//var about = require('./routes/about');
 
 var app = express();
 
@@ -60,7 +60,7 @@ if (app.get('env') === 'development') {
 }
 
 app.use('/', routes);
-app.use('/about', about);
+//app.use('/about', about);
 
 hbs.localsAsTemplateData(app);
 hbs.registerPartials(__dirname + '/views/partials');
