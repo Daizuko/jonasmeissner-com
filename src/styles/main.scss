@@ -5,37 +5,18 @@
 
 	╔═════════════════════════════════════════╗
 	║            jonasmeissner.com            ║
-	║              version 0.6.5              ║
+	║               version 0.8               ║
 	║                                         ║
 	║         Created by Jonas Meissner       ║
 	║                                         ║
 	║-----------------------------------------║
 	║                                         ║
-	║ PLUG-INS                                ║
+	║ Libraries                               ║
 	║ * jQuery                                ║
-	║ * Advanced Parallax Effect              ║
+	║ * Node.js                               ║
+	║ * Handlebars.js                         ║
 	║ * Font Awesome                          ║
-	║ * Pace.js                               ║
 	║                                         ║
-	║ TODO                                    ║
-	║ [X] Favicon                             ║
-	║ [X] Logo                                ║
-	║ [X] Implement Font Awesome              ║
-	║ [X] Website loading animation           ║
-	║ [X] Frosted glass overlay               ║
-	║ [X] Animated 'scroll down' indicator    ║
-	║ [ ] Circle progress bars                ║
-	║ [ ] Social icons tooltip                ║
-	║ [ ] To-top arrow animates on hover      ║
-	║ [ ] Settings menu with push             ║
-	║     (in footer, pushes up)              ║
-	║ [ ] Settings: Switch highlight color    ║
-	║ [ ] Settings: Switch theme for header   ║
-	║ [ ] Store settings in cookie            ║
-	║ [ ] Two columns in 'Personal' section   ║
-	║     (left = personal, right = business) ║
-	║ [ ] Casual photo                        ║
-	║ [ ] Shirt+tie photo                     ║
 	╚═════════════════════════════════════════╝
 
 
@@ -45,13 +26,14 @@
 	+-----------------------------+
 	| 01. Import Google Web Fonts |
 	| 02. CSS Reset               |
-	| 03. General Settings        |
-	| 04. 'Header' Section        |
-	| 05. 'Personal' Section      |
-	| 06. 'Business' Section      |
-	| 07. 'Contact' Section       |
-	| 08. 'Footer' Section        |
-	| 09. Responsive Settings     |
+	| 03. SASS Variables          |
+	| 04. General Settings        |
+	| 05. 'Header' Section        |
+	| 06. 'Personal' Section      |
+	| 07. 'Business' Section      |
+	| 08. 'Contact' Section       |
+	| 09. 'Footer' Section        |
+	| 10. Responsive Settings     |
 	+-----------------------------+
 
 */
@@ -116,7 +98,17 @@ table {
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║ 03 GENERAL SETTINGS                                                          ║
+║ 03 SASS VARIABLES                                                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝ */
+$highlight: #ffcc00;
+
+
+
+
+
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ 04 GENERAL SETTINGS                                                          ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 * {
 	-webkit-box-sizing: border-box;
@@ -131,27 +123,6 @@ body {
 	font: 300 14px 'Open Sans', sans-serif;
 	text-align: center;
 	color: #999;
-}
-
-/* Website loading animation */
-.pace-running {}
-.pace-done {}
-.pace {
-  -webkit-pointer-events: none;
-  pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-.pace-inactive { display: none; }
-.pace .pace-progress {
-  background: #ffcc00;
-  position: fixed;
-  top: 0;
-  right: 100%;
-  width: 100%;
-  height: 3px;
-	z-index: 2000;
 }
 
 /* For fullscreen menu toggling */
@@ -184,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Section Titles */
 .section-title {
 	margin: 0 0 15px 0;
-	color: #ffcc00;
+	color: $highlight;
 	font-size: 40px;
 	text-transform: uppercase;
 	letter-spacing: 8px;
@@ -202,8 +173,8 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0 auto;
 }
 
-.container-small {max-width: 900px;}
-.container-big {max-width: 1050px;}
+.container-small { max-width: 900px; }
+.container-big { max-width: 1050px; }
 
 /* Fade-in Animation */
 @-webkit-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -236,9 +207,9 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0 40px;
 	height: 60px;
 	line-height: 60px;
-	background: #ffcc00;
+	background: $highlight;
 	border: none;
-	box-shadow: 0 8px #c9a100;
+	box-shadow: 0 8px darken($highlight, 10%);
 	color: #fff;
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
@@ -252,7 +223,7 @@ h1, h2, h3, h4, h5, h6 {
 	transition: background 300ms linear;
 }
 .button:hover {
-	background: #edbf00;
+	background: lighten($highlight, 11%);
 	color: #fff;
 	-webkit-transition: background 300ms linear;
 	-moz-transition: background 300ms linear;
@@ -261,9 +232,8 @@ h1, h2, h3, h4, h5, h6 {
 	transition: background 300ms linear;
 }
 .button:active {
-	background: #edbf00;
-	box-shadow: 0 4px #c9a100;
-	transform: translateY(4px);
+	box-shadow: 0 6px darken($highlight, 10%);
+	transform: translateY(2px);
 }
 
 .module { background-color: #fff; }
@@ -283,7 +253,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║ 04 'HEADER' SECTION                                                          ║
+║ 05 'HEADER' SECTION                                                          ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 #welcome {
 	background: url('../../public/images/welcome.jpg') no-repeat center;
@@ -433,7 +403,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .navigation:before {
 	content: '';
-	background: #ffcc00;
+	background: $highlight;
 	opacity: 0.75;
 	left: -105%;
 	top: 0;
@@ -528,7 +498,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║ 05 'PERSONAL' SECTIONS                                                       ║
+║ 06 'PERSONAL' SECTIONS                                                       ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 #personal {	padding: 100px 50px; }
 
@@ -565,7 +535,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║ 06 'BUSINESS' SECTION                                                        ║
+║ 07 'BUSINESS' SECTION                                                        ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 #business {
 	padding: 100px 50px 75px;
@@ -599,7 +569,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║ 07 'CONTACT' SECTION                                                         ║
+║ 08 'CONTACT' SECTION                                                         ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 #contact { padding: 100px 50px 150px 50px; }
 
@@ -633,7 +603,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .social a:hover {
-	color: #ffcc00;
+	color: $highlight;
 }
 
 .info {
@@ -665,7 +635,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .info h3 {
-	color: #ffcc00;
+	color: $highlight;
 	margin: 0 0 15px 0;
 }
 
@@ -675,7 +645,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║ 08 'FOOTER' SECTION                                                          ║
+║ 09 'FOOTER' SECTION                                                          ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 footer {
 	margin: 50px 0 0 0;
@@ -729,7 +699,7 @@ footer p {
 
 .right a { color: #999 }
 
-.right a:hover { color: #ffcc00 }
+.right a:hover { color: $highlight }
 
 
 
@@ -737,7 +707,7 @@ footer p {
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║ 09 'RESPONSIVE' SECTION                                                      ║
+║ 10 'RESPONSIVE' SECTION                                                      ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 @media (max-width: 768px) {
 	.navicon {
