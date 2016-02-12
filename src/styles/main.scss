@@ -96,6 +96,8 @@ table {
 ║ 03 SASS VARIABLES                                                            ║
 ╚══════════════════════════════════════════════════════════════════════════════╝ */
 $highlight: #ffcc00;
+$darker: darken($highlight, 10%);
+$lighter: lighten($highlight, 15%);
 
 
 
@@ -204,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 60px;
 	background: $highlight;
 	border: none;
-	box-shadow: 0 8px darken($highlight, 10%);
+	box-shadow: 0 8px $darker;
 	color: #fff;
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
@@ -218,7 +220,7 @@ h1, h2, h3, h4, h5, h6 {
 	transition: background 300ms linear;
 }
 .button:hover {
-	background: lighten($highlight, 11%);
+	background: $lighter;
 	color: #fff;
 	-webkit-transition: background 300ms linear;
 	-moz-transition: background 300ms linear;
@@ -227,7 +229,7 @@ h1, h2, h3, h4, h5, h6 {
 	transition: background 300ms linear;
 }
 .button:active {
-	box-shadow: 0 6px darken($highlight, 10%);
+	box-shadow: 0 6px $darker;
 	transform: translateY(2px);
 }
 
@@ -498,8 +500,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .corners {
 	display: inline-block;
-  width: 170px;
-	height: 170px;
+  width: 250px;
+	height: 250px;
   margin: 0 10px;
   position: relative;
 }
@@ -508,21 +510,37 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 170px;
-  height: 170px;
+  width: 250px;
+  height: 250px;
   background:
-		linear-gradient(45deg,  rgba(255,255,255,1) 62px, transparent 62px),
-		linear-gradient(135deg, rgba(255,255,255,1) 62px, transparent 62px),
-		linear-gradient(225deg, rgba(255,255,255,1) 62px, transparent 62px),
-		linear-gradient(315deg, rgba(255,255,255,1) 62px, transparent 62px);
+		linear-gradient(45deg,  rgba(255,255,255,1) 95px, transparent 95px),
+		linear-gradient(135deg, rgba(255,255,255,1) 95px, transparent 95px),
+		linear-gradient(225deg, rgba(255,255,255,1) 95px, transparent 95px),
+		linear-gradient(315deg, rgba(255,255,255,1) 95px, transparent 95px);
 }
 
 #personal img {
-	width: 170px;
-	height: 170px;
+	width: 250px;
+	height: 250px;
 }
 
+.story {
+	margin-top: 30px;
+	padding: 10px 20px;
+	background: #fafafa;
+	color: #555;
+	font-size: 20px;
+	line-height: 20px;
+	text-align: justify;
+}
 
+.story p { margin: 5px 0; }
+
+.story a {
+	color: #555;
+	border-bottom: 1px dotted #999;
+}
+.story a:hover { color: #111; }
 
 
 
